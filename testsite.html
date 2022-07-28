@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test site</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="script.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <h1>Whenever this page is loaded, a request should be sent.</h1>
+
+  <div class="papaj">
+    <img src="papaj.png" alt="">
+  </div>
+  <div class="papaj">
+    <img src="papaj.png" alt="">
+  </div>
+  <div class="papaj">
+    <img src="papaj.png" alt="">
+  </div>
+  <div class="last-papaj">
+    <img src="papaj.png" alt="">
+  </div>
+
+
+  <!-- <script type="text/javascript">
+  function sendInfo(activity) {
+    $.post("http://127.0.0.1:5000/" + activity, {
+      message: activity
+    });
+  }
+
+  const startTime = performance.now()
+  let isScrolled = false;
+  let isRead = false;
+
+  sendInfo("open")
+
+  $(window).scroll(function() {
+
+    function elementScrolled(elem) {
+      var docViewTop = $(window).scrollTop();
+      var docViewBottom = docViewTop + $(window).height();
+      var elemTop = $(elem).offset().top;
+      return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+    }
+
+    if (elementScrolled('.last-papaj') & !isScrolled) {
+      isScrolled = true
+    }
+
+    if (isScrolled & (performance.now() - startTime > 30000) & !isRead) {
+      sendInfo("read")
+      isRead = true;
+    }
+  });
+  </script> -->
+</body>
+
+</html>
