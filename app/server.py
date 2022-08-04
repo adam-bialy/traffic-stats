@@ -53,8 +53,7 @@ def home():
 def opened():
     with Session(engine) as session:
         new_view = View(timestamp=datetime.now(),
-                        timezone=request.form["timezone"],
-                        ip=request.remote_addr)
+                        timezone=request.form["timezone"])
         session.add_all([new_view])
         session.commit()
     return make_response("New view added to database.")
@@ -64,8 +63,7 @@ def opened():
 def read():
     with Session(engine) as session:
         new_read = Read(timestamp=datetime.now(),
-                        timezone=request.form["timezone"],
-                        ip=request.remote_addr)
+                        timezone=request.form["timezone"])
         session.add_all([new_read])
         session.commit()
     return make_response("New read added to database.")

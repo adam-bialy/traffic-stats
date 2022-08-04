@@ -1,4 +1,4 @@
-import config
+import app.config as config
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, Session
 from sqlalchemy import Column, String, DateTime, Integer
@@ -13,16 +13,22 @@ class View(base):
     view_id = Column(Integer, primary_key=True, autoincrement=True)
     timestamp = Column(DateTime, nullable=False)
     timezone = Column(String(50))
-    ip = Column(String(100))
 
 
 class Read(base):
     __tablename__ = "read"
 
-    view_id = Column(Integer, primary_key=True, autoincrement=True)
+    read_id = Column(Integer, primary_key=True, autoincrement=True)
     timestamp = Column(DateTime, nullable=False)
     timezone = Column(String(50))
-    ip = Column(String(100))
+
+
+class User(base):
+    __tablename__ = "user"
+
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(100), unique=True, nullable=False)
+    password = Column(String(100), nullable=False)
 
 
 def create_tables(engine):
