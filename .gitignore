@@ -2,3 +2,4 @@
 /.idea/
 /app/config.py
 /setup_code.py
+/app/__pycache__/
