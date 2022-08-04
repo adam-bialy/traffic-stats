@@ -19,18 +19,7 @@ body {
   margin: auto 8%;
 }
 
-.profile-pic {
-  margin: 6rem auto 4.5rem;
-  height: 10rem;
-  border-radius: 5rem;
-  box-shadow: 0 0.25rem 0.5rem #21209C;
-}
-
-.profile-pic:hover {
-  box-shadow: 0 0.25rem 0.5rem #FDB827;
-}
-
-.summary-div {
+.content-div {
   margin: auto 28%;
 }
 
@@ -76,75 +65,24 @@ a:hover {
   color: #FDB827;
 }
 
-.fa-solid {
-  font-size: 5rem;
-  margin: 4% 0;
-  color: #21209C;
-}
-
-.fa-solid:hover {
-  color: #FDB827;
-}
-
-.skill-image {
-  float: left;
-  height: 10rem;
-}
-
-.right {
-  float: right;
-  margin-left: 1.5rem;
-}
-
-.left {
-  float: left;
-  margin-right: 1.5rem;
-}
-
-.hobbies-div p {
-  margin-bottom: 2rem;
-}
-
-.skill-div p {
-  font-family: "Merriweather";
-  line-height: 1.75rem;
-  font-size: 1rem;
-}
-
-.code {
-  font-family: "Roboto Mono"
-}
-
-.hobby-icon {
-  height: 3rem;
-}
-
-.link-icon {
-  margin: auto 3.5rem;
+.my-button {
+  background-color: #21209C;
+  color: #F1F1F1;
+  border-radius: 5%;
+  border: none;
+  width: 4rem;
   height: 2rem;
-  /* opacity: 30%; */
-  filter: contrast(25%);
+  font-size: 1rem;
+  margin: 1rem 1rem;
 }
 
-.link-icon:hover {
-  filter: invert(89%) sepia(11%) saturate(6303%) hue-rotate(336deg) brightness(100%) contrast(99%);
-}
-
-.link-row {
-  margin: 5% auto;
-}
-
-.footer-link {
-  font-size: 0.75rem;
+input[type=text] {
+  margin: 0.5rem auto;
 }
 
 @media (max-width: 1200px) {
-  .title-div, .description-div, .summary-div, .hobbies-div {
+  .content-div {
     margin: auto 10%;
-  }
-
-  .skill-div {
-    margin: 12% auto;
   }
 }
 
@@ -163,55 +101,12 @@ a:hover {
     margin: 0.5rem auto 3.5rem;
   }
 
-  .profile-pic {
-    height: 12rem;
-    border-radius: 6rem;
-  }
-
   p {
     font-size: 2.25rem;
   }
 
-  .skill-div p {
-    font-size: 2.25rem;
-    line-height: 3.5rem;
-  }
-
-  .skill-image {
-    height: 15rem;
-  }
-
-  .right {
-    margin-left: 2.5rem;
-  }
-
-  .left {
-    margin-right: 2.5rem;
-  }
-
-  .hobby-icon {
-    margin-top: 1.5rem;
-  }
-
   h5 {
     font-size: 2rem;
-  }
-
-  .link-row {
-    margin: 7% auto;
-  }
-
-  .link-icon {
-    height: 3rem;
-    margin: auto 2.5rem;
-  }
-
-  .footer-link {
-    font-size: 1.25rem;
-  }
-
-  .link-icon {
-    margin: auto 4rem;
   }
 }
 

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Website statitics</h2>
+<div class="content-div">
+  <h3>Log in to access the data:</h3>
+  <form class="" action="/login" method="post">
+    <input type="text" name="username" value="" placeholder="Enter username..."><br>
+    <input type="password" name="password" value="" placeholder="Enter password..."><br>
+    <button type="submit" name="login" class="my-button">Enter</button>
+    {% if message %}
+      <h5>{{ message }}</h5>
+    {% endif %}
+  </form>
+</div>
+
+{% endblock %}

@@ -1,13 +1,15 @@
-import app.config as config
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, Session
+import hashlib
+
+
 from sqlalchemy import Column, String, DateTime, Integer
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 
-base = declarative_base()
+db = SQLAlchemy()
 
 
-class View(base):
+class View(db.Model):
     __tablename__ = "view"
 
     view_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -15,7 +17,7 @@ class View(base):
     timezone = Column(String(50))
 
 
-class Read(base):
+class Read(db.Model):
     __tablename__ = "read"
 
     read_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -23,7 +25,7 @@ class Read(base):
     timezone = Column(String(50))
 
 
-class User(base):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
 
     user_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -31,17 +33,6 @@ class User(base):
     password = Column(String(100), nullable=False)
 
 
-def create_tables(engine):
-    base.metadata.create_all(engine)
+def hash_password(password):
+    return hashlib.sha256((password+"2137").encode()).hexdigest()
 
-
-def clear_tables(engine):
-    with Session(engine) as session:
-        session.query(View).delete()
-        session.query(Read).delete()
-        session.commit()
-
-
-if __name__ == "__main__":
-    engine = create_engine(config.DATABASE_URL)
-    clear_tables(engine)
