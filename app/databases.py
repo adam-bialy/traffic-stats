@@ -1,6 +1,6 @@
 import config
-from sqlalchemy import create_engine, select, desc
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, Session
 from sqlalchemy import Column, String, DateTime, Integer
 
 
@@ -25,11 +25,17 @@ class Read(base):
     ip = Column(String(100))
 
 
+def create_tables(engine):
+    base.metadata.create_all(engine)
+
+
+def clear_tables(engine):
+    with Session(engine) as session:
+        session.query(View).delete()
+        session.query(Read).delete()
+        session.commit()
+
+
 if __name__ == "__main__":
     engine = create_engine(config.DATABASE_URL)
-    # base.metadata.create_all(engine)
-    with engine.connect() as conn:
-        command = select(Read.timestamp, Read.timezone, Read.ip).\
-            order_by(desc("timestamp"))
-        print(conn.execute(command).fetchall())
-
+    clear_tables(engine)
