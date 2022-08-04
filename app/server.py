@@ -1,15 +1,20 @@
 from flask import Flask, request, render_template, make_response, Markup, redirect, flash, get_flashed_messages
 from flask_login import LoginManager, login_user, login_required, logout_user
 from sqlalchemy import select, desc
-from databases import View, Read, User, hash_password, db
-import config
+from app.databases import View, Read, User, hash_password, db
 from datetime import datetime
 import pandas as pd
+import os
+import re
 
 
 app = Flask(__name__)
 app.secret_key = "key_to_ag_stats"
-app.config["SQLALCHEMY_DATABASE_URI"] = config.DATABASE_URL
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
