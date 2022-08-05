@@ -1,5 +1,8 @@
+// Collecting anonymous user data.
+let isConsent = false;
+
 function sendInfo(activity) {
-  $.post("http://127.0.0.1:5000/" + activity, {
+  $.post("https://agstats.herokuapp.com/" + activity, {
     message: activity,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
   });
@@ -9,7 +12,13 @@ const startTime = performance.now()
 let isScrolled = false;
 let isRead = false;
 
-sendInfo("view")
+$(".consent-button").on("click", function() {
+  if (this.name === "accept") {
+    isConsent = true;
+    sendInfo("view")
+  }
+  $(".consent").remove();
+});
 
 $(window).scroll(function() {
 
@@ -20,11 +29,11 @@ $(window).scroll(function() {
     return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
   }
 
-  if (elementScrolled('.last-papaj') & !isScrolled) {
+  if (elementScrolled(".footer") & !isScrolled) {
     isScrolled = true
   }
 
-  if (isScrolled & (performance.now() - startTime > 30000) & !isRead) {
+  if (isScrolled & (performance.now() - startTime > 30000) & !isRead & isConsent) {
     sendInfo("read")
     isRead = true;
   }
