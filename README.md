@@ -9,4 +9,5 @@ deployment environment etc. These are, among other things:
 <li>Database connection</li>
 <li>Static files (stylesheet, icons and images)</li>
 
+<br>
 © 2022 AG
