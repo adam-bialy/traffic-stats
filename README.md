@@ -1,6 +1,7 @@
 # Website visit tracker
 
-A simple Flask API and application for tracking and viewing website visits.
+A simple Flask API for tracking and viewing website visits, 
+and an associated web application for displaying them.
 
 I purposefully omitted several details, which have to be added 
 in order for the app to work and which depend on preferences,
