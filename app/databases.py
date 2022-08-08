@@ -1,4 +1,3 @@
-import hashlib
 from sqlalchemy import Column, String, DateTime, Integer
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
@@ -32,5 +31,7 @@ class User(UserMixin, db.Model):
 
 
 def hash_password(password):
-    return hashlib.sha256((password+"2137").encode()).hexdigest()
-
+    """
+    Should return hashed password.
+    """
+    pass

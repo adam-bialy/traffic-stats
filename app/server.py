@@ -4,23 +4,26 @@ from sqlalchemy import select, desc
 from app.databases import View, Read, User, hash_password, db
 from datetime import datetime
 import pandas as pd
-import os
-import re
 
 
 app = Flask(__name__)
-app.secret_key = "key_to_ag_stats"
-uri = os.getenv("DATABASE_URL")  # or other relevant config var
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+app.secret_key = "some_secret_key"
+
+# Set up connection to your database below:
+uri = ""
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 
 def convert_table(table):
+    """
+    Method for processing tables with views and reads from the database.
+    My example below.
+    """
     try:
         table = pd.DataFrame(table)
         table["Date"] = table["timestamp"].apply(lambda x: x.strftime("%d.%m.%Y"))
@@ -89,6 +92,9 @@ def unauthorized_callback():
 
 @app.route("/view", methods=["POST"])
 def opened():
+    """
+    Call to API to record new website view in the database.
+    """
     new_view = View(timestamp=datetime.now(),
                     timezone=request.form["timezone"])
     db.session.add(new_view)
@@ -98,6 +104,9 @@ def opened():
 
 @app.route("/read", methods=["POST"])
 def read():
+    """
+    Call to API to record new website read in the database.
+    """
     new_read = Read(timestamp=datetime.now(),
                     timezone=request.form["timezone"])
     db.session.add(new_read)

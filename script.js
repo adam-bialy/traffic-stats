@@ -1,13 +1,17 @@
-// Collecting anonymous user data.
+// An example of a frontend script which can be used to count visits to a website.
+
+
 function sendInfoLocale(activity) {
-  $.post("https://agstats.herokuapp.com/" + activity, {
+// This method is for sending information about a view or read with locale (i.e. when consent is provided).
+  $.post("<< Address of the server which collects data >>" + activity, {
     message: activity,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
   });
 }
 
 function sendInfoEmpty(activity) {
-  $.post("https://agstats.herokuapp.com/" + activity, {
+// This method is for sending information about a view or read without locale.
+  $.post("<< Address of the server which collects data >>" + activity, {
     message: activity,
     timezone: null
   });
@@ -44,7 +48,7 @@ $(window).scroll(function() {
     return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
   }
 
-  if (elementScrolled(".footer") & !isScrolled) {
+  if (elementScrolled("<< element for which you want to detect scrolling >>") & !isScrolled) {
     isScrolled = true
   }
 
