@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from sqlalchemy import select, desc
 from app.databases import View, Read, User, hash_password, db
 from datetime import datetime
+import pytz
 import pandas as pd
 
 
@@ -26,10 +27,15 @@ def convert_table(table):
     """
     try:
         table = pd.DataFrame(table)
+        table["timestamp"] = table["timestamp"].dt.tz_localize(pytz.timezone("UTC"))
+        table["timestamp"] = table["timestamp"].dt.tz_convert(pytz.timezone("Europe/Warsaw"))
         table["Date"] = table["timestamp"].apply(lambda x: x.strftime("%d.%m.%Y"))
         table["Time"] = table["timestamp"].apply(lambda x: x.strftime("%H:%M:%S"))
         table = table.rename(columns={"timezone": "Location"})
-        return table[["Location", "Date", "Time"]].to_html(index=False)
+        table_today = table[table["timestamp"].dt.date == datetime.now().date()]
+        table_counts = table.groupby("Date")["timestamp"].count().reset_index().rename(columns={"timestamp": "Count"})
+        table_counts = table_counts.sort_values(by="Date", ascending=False)
+        return table_today[["Location", "Date", "Time"]].to_html(index=False), table_counts.to_html(index=False)
     except KeyError:
         return "No data"
 
@@ -76,9 +82,10 @@ def stats():
             command = select(Read.timestamp, Read.timezone). \
                 order_by(desc("timestamp"))
             reads = conn.execute(command).fetchall()
-        views = convert_table(views)
-        reads = convert_table(reads)
-        return render_template("stats.html", views=Markup(views), reads=Markup(reads))
+        views_today, view_count = convert_table(views)
+        reads_today, read_count = convert_table(reads)
+        return render_template("stats.html", views_today=Markup(views_today), view_count=Markup(view_count),
+                               reads_today=Markup(reads_today), read_count=Markup(read_count))
     if request.method == "POST":
         logout_user()
         return redirect("/login")
