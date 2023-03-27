@@ -45,7 +45,7 @@ allowed hosts from environment variables.
 After that, you can deploy the application with:
 
 ```
-docker compose up
+docker compose up --build
 ```
 
 The database initially does not contain any users. In order to create

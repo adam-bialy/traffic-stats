@@ -1,9 +1,9 @@
-FROM node:19-bullseye
+FROM node:latest
 
 WORKDIR /frontend
 
-COPY package*.json ./
+COPY package.json /frontend
 
 RUN npm install
 
-COPY . .
+COPY . /frontend
