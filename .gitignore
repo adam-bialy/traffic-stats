@@ -1,0 +1,6 @@
+/venv
+/.idea
+.env*
+!.env.example
+/apidb
+/.pre-commit-config.yaml

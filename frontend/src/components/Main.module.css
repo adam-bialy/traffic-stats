@@ -1,0 +1,14 @@
+.main {
+  background-color: #e3f6ff;
+  padding: 1% 0;
+}
+
+.main select {
+  margin: 1%;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5% 3%;
+  background-color: white;
+  border: 2px solid #8dcbe6;
+  border-radius: 3% / 15%;
+}

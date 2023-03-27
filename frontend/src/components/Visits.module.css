@@ -1,0 +1,13 @@
+.visits {
+  padding: 2% 0;
+  margin: auto;
+}
+
+.visits h3 {
+  margin: 1%;
+  padding: 0;
+}
+
+.visits select {
+  margin-bottom: 1%;
+}

@@ -1,0 +1,23 @@
+.loginForm {
+  padding: 2%;
+}
+
+.loginForm input {
+  display: block;
+  margin: 1% auto;
+  padding: 0.5%;
+  font-size: 1rem;
+  border: 2px solid #8dcbe6;
+  border-radius: 2% / 6%;
+}
+
+.loginForm input:focus,
+input:active {
+  outline: 2px solid #ffea20;
+  border: 2px solid #ffea20;
+}
+
+.loginForm p {
+  color: black;
+  font-style: italic;
+}
